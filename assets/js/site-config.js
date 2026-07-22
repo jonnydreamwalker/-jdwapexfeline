@@ -1,7 +1,8 @@
-/** Apex Feline — brand + categories + API */
+/** Apex Feline — brand + multi-store FreePort */
 window.APEX_SITE = {
   brand: "JONNYDREAMWALKER",
   tagline: "APEX FELINE SUPPLY",
+  store: "feline",
   trustBar: "Premium feline gear • Litter • Enrichment. Florida warehouse. Fast ship FL-TX-CA.",
   cartKey: "jdw_feline_cart",
   apiBase: "https://api.jdwapexherp.com",
@@ -17,3 +18,4 @@ window.APEX_SITE = {
   ]
 };
 window.APEX_API_BASE = window.APEX_SITE.apiBase;
+window.APEX_STORE = window.APEX_SITE.store;

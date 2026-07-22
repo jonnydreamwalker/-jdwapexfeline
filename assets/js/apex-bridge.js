@@ -3,13 +3,17 @@
     var b = (global.APEX_API_BASE || (global.APEX_SITE && global.APEX_SITE.apiBase) || "").replace(/\/$/, "");
     return b || "https://api.jdwapexherp.com";
   }
+  function storeId() {
+    return global.APEX_STORE || (global.APEX_SITE && global.APEX_SITE.store) || "feline";
+  }
   function imgUrl(path) {
     if (!path) return "";
     if (path.indexOf("http") === 0) return path;
     return base() + path;
   }
   async function fetchProducts(category) {
-    var q = category ? "?category=" + encodeURIComponent(category) : "";
+    var q = "?store=" + encodeURIComponent(storeId());
+    if (category) q += "&category=" + encodeURIComponent(category);
     var res = await fetch(base() + "/api/products" + q, { mode: "cors", cache: "no-store" });
     if (!res.ok) throw new Error("products " + res.status);
     return res.json();
@@ -46,15 +50,15 @@
           '</p><div class="text-emerald-500 font-bold text-lg mb-4">' + money(i.price) + '</div></div><div class="p-8 pt-0">' + btn + '</div></div>';
       }).join("");
       if (status) {
-        status.textContent = "Live catalog · " + (data.warehouse || "ApexFreePort") + " · " + items.length + " items";
+        status.textContent = "Live · " + (data.storeName || "Feline") + " · " + items.length + " items";
         status.className = "text-emerald-400 text-sm mt-3";
       }
     } catch (e) {
-      el.innerHTML = '<p class="text-amber-400/90 text-center col-span-full py-12">Inventory bridge offline.</p>';
+      el.innerHTML = '<p class="text-amber-400/90 text-center col-span-full py-12">Inventory offline — check Feline feed in ApexFreePort.</p>';
       if (status) { status.textContent = "Inventory offline"; status.className = "text-amber-400 text-sm mt-3"; }
     }
   }
-  global.ApexBridge = { base: base, fetchProducts: fetchProducts, renderCatalog: renderCatalog, imgUrl: imgUrl };
+  global.ApexBridge = { base: base, storeId: storeId, fetchProducts: fetchProducts, renderCatalog: renderCatalog, imgUrl: imgUrl };
   document.addEventListener("DOMContentLoaded", function () {
     var el = document.getElementById("apex-catalog");
     if (el) renderCatalog("#apex-catalog", el.getAttribute("data-category") || undefined);
