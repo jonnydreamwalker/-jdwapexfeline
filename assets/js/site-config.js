@@ -4,8 +4,8 @@ window.APEX_SITE = {
   tagline: "APEX FELINE SUPPLY",
   store: "feline",
   trustBar: "Premium feline gear • Litter • Enrichment. Florida warehouse. Fast ship FL-TX-CA.",
-  cartKey: "jdw_feline_cart",
-  apiBase: "https://api.jdwapexherp.com",
+  cartKey: "jdw_cart",
+  apiBase: "https://freeport.jdwapexherp.com",
   paypalBusiness: "jonnydreamwalker@gmail.com",
   categories: [
     { href: "services/food.html", label: "Food & Treats", dataCategory: "Food" },
